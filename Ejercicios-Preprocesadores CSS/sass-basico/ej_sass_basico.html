@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ejercicio Sass básico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sass-basico/styles.css">
+</head>
+<body>
+<header class="header">
+    <h1>Sass básico</h1>
+    <p>Variables, mixins reutilizables y anidado de estilos.</p>
+</header>
+
+<div class="grid">
+    <div class="card">
+        <h2>Variables</h2>
+        <p>Colores definidos en <code>_variables.scss</code> se usan en fondo, textos y botones.</p>
+        <span class="pill">Primary pill</span>
+    </div>
+
+    <div class="card">
+        <h2>Mixins</h2>
+        <p>El mixin <code>themed-bg</code> recibe color de fondo y texto.</p>
+        <span class="notice">Aviso destacado</span>
+    </div>
+
+    <div class="card">
+        <h2>Anidado</h2>
+        <p>Las reglas de esta card (títulos, textos, enlaces) vienen de <code>_nested.scss</code>.</p>
+        <div class="actions">
+            <a href="#">Acción 1</a>
+            <a href="#">Acción 2</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

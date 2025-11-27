@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Mostrar/Ocultar Div</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1f2933;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            padding: 2.2rem;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            width: 420px;
+        }
+        h1 {
+            margin: 0 0 1.5rem;
+            text-align: center;
+            letter-spacing: 0.04em;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        .caja {
+            margin-top: 1.2rem;
+            height: 60px;
+            background: #00d9ff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Mostrar/Ocultar Div</h1>
+    <div class="option">
+        <input id="mostrar" name="control" type="radio" value="mostrar" onchange="toggleDiv(this.value)" checked>
+        <label for="mostrar">Mostrar Div</label>
+    </div>
+    <div class="option">
+        <input id="ocultar" name="control" type="radio" value="ocultar" onchange="toggleDiv(this.value)">
+        <label for="ocultar">Ocultar Div</label>
+    </div>
+
+    <div id="caja" class="caja"></div>
+</div>
+
+<script>
+    const caja = document.getElementById("caja");
+
+    /**
+     * toggleDiv: cambia la visibilidad de la caja alterando la propiedad display.
+     * @param {string} accion - Valor seleccionado en los radios (mostrar|ocultar).
+     * @returns {void}
+     */
+    const toggleDiv = (accion) => {
+        const mostrar = accion === "mostrar";
+        caja.style.display = mostrar ? "block" : "none";
+    };
+
+    window.toggleDiv = toggleDiv;
+</script>
+</body>
+</html>

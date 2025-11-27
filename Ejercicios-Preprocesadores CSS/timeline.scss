@@ -1,0 +1,90 @@
+$ink: #0f172a;
+$border: #e2e6f0;
+$soft: #f7f8ff;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  color: $ink;
+  background: radial-gradient(circle at 20% 20%, #e3ebff, #f7f8ff 42%), radial-gradient(circle at 80% 0%, #ffe9f1, #f7f8ff 45%);
+}
+
+.hero {
+  color: #f4f7ff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.timeline-board {
+  background: #fff;
+  border: 1px solid $border;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(15, 22, 41, 0.18);
+  overflow: hidden;
+}
+
+.month-row .col {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 10px 0;
+}
+
+.week-row .col {
+  border: 1px solid $border;
+  padding: 10px 0;
+  font-weight: 600;
+}
+
+.timeline-body {
+  position: relative;
+  height: 320px;
+  background: #fff;
+}
+
+.timeline-card {
+  background: #6c757d;
+  color: #fff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  min-height: 110px;
+  box-shadow: 0 12px 28px rgba(15, 22, 41, 0.2);
+}
+
+.timeline-card .status {
+  font-weight: 700;
+}
+
+.timeline-card .date {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.avatar-sm {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+}
+
+.tl-item-1 {
+  position: absolute;
+  top: 18px;
+  left: 2%;
+  width: 42%;
+}
+
+.tl-item-2 {
+  position: absolute;
+  top: 130px;
+  left: 30%;
+  width: 38%;
+}
+
+.tl-item-3 {
+  position: absolute;
+  top: 235px;
+  left: 56%;
+  width: 40%;
+}

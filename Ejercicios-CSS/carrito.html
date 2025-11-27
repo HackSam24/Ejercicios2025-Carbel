@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <style>
+        :root{
+            --bordes: #d1d5db;
+            --sombra: rgba(17, 24, 39, 0.08);
+            --texto: #111827;
+            --fondo: #2f3338;
+            --tarjeta: #ffffff;
+            --detalle: #e5e7eb;
+            --muted: #4b5563;
+            --acento: #0ea5e9;
+            --btn-cat: #950000;
+            --btn-cat-hover: #b00000;
+            --btn-cart: #1a008f;
+            --btn-cart-hover: #2300b3;
+            --btn-text: #ffffff;
+        }
+
+        *{ box-sizing: border-box; }
+
+        body.grid-container{
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2f3338 0%, #3c424a 100%);
+            color: var(--texto);
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-rows: auto auto 1fr auto;
+            grid-template-areas:
+                "cabecera cabecera cabecera cabecera"
+                "links links links links"
+                "aside principal principal principal"
+                "pie pie pie pie";
+            gap: 16px;
+            padding: 16px;
+        }
+
+        header{ text-align: center; }
+        header h1{
+            margin: 0 0 6px;
+            font-size: 2rem;
+            letter-spacing: 0.04em;
+        }
+        header p{ margin: 0; color: var(--muted); }
+
+        nav{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        nav a{
+            color: var(--texto);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--detalle);
+            background: #f8fafc;
+            transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+        }
+
+        nav a:hover{
+            color: #0b6ea9;
+            background-color: #e5f3ff;
+            border-color: #cde9ff;
+        }
+
+        .nav-buttons{
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-btn{
+            border: none;
+            color: var(--btn-text);
+            padding: 9px 14px;
+            border-radius: 8px;
+            font-size: 0.96rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.25s ease, padding 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 8px 16px var(--sombra);
+        }
+
+        .nav-btn.catalogo{ background: var(--btn-cat); }
+        .nav-btn.carrito{ background: var(--btn-cart); }
+
+        .nav-btn.catalogo:hover{
+            background: var(--btn-cat-hover);
+            padding: 10px 16px;
+            box-shadow: 0 10px 20px rgba(149, 0, 0, 0.2);
+        }
+
+        .nav-btn.carrito:hover{
+            background: var(--btn-cart-hover);
+            padding: 10px 16px;
+            box-shadow: 0 10px 20px rgba(26, 0, 143, 0.2);
+        }
+
+        aside h2,
+        main h2{
+            margin: 0 0 12px;
+            font-size: 1.2rem;
+            letter-spacing: 0.01em;
+        }
+
+        .surface{
+            background: var(--tarjeta);
+            border: 1px solid var(--bordes);
+            border-radius: 12px;
+            padding: 16px 18px;
+            box-shadow: 0 12px 24px var(--sombra);
+        }
+
+        .item1{ grid-area: cabecera; }
+        .item2{ grid-area: links; }
+        .item3{ grid-area: aside; }
+        .item4{ grid-area: principal; }
+        .item5{ grid-area: pie; }
+
+        .cart-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .cart-card{
+            background: #ffffff;
+            border: 1px solid var(--detalle);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 10px 22px var(--sombra);
+        }
+
+        .cart-card h3{
+            margin: 0;
+            font-size: 1.05rem;
+            letter-spacing: 0.01em;
+        }
+
+        .cart-meta{
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .cart-precio{
+            margin: 0;
+            font-weight: 800;
+            color: #0f766e;
+        }
+
+        .empty{
+            margin: 0;
+            padding: 18px;
+            border: 1px dashed var(--detalle);
+            border-radius: 10px;
+            background: #f8fafc;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .total{
+            margin: 16px 0 0;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .action-row{
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .action-btn{
+            border: none;
+            color: #ffffff;
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-size: 0.96rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 18px var(--sombra);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .action-btn:hover{
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px var(--sombra);
+        }
+
+        .danger{ background: #b91c1c; }
+        .secondary{ background: #0ea5e9; }
+
+        .cart-count{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 26px;
+            padding: 4px 6px;
+            margin-left: 6px;
+            border-radius: 999px;
+            background: #0ea5e9;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="grid-container">
+    <header class="surface item1">
+        <h1>Carrito de compras</h1>
+        <p>Listado de productos agregados desde el catalogo.</p>
+    </header>
+
+    <nav class="surface item2">
+        <a href="#">Inicio</a>
+        <a href="#">Ropa</a>
+        <a href="#">Protecciones</a>
+        <a href="#">Equipamiento</a>
+        <div class="nav-buttons">
+            <button type="button" class="nav-btn catalogo" onclick="window.location.href='ej_productos.html'">Catalogo</button>
+            <button type="button" class="nav-btn carrito" onclick="window.location.href='carrito.html'">
+                Carrito
+                <span id="cart-count" class="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <aside class="surface item3">
+        <h2>Resumen</h2>
+        <p class="cart-meta">Los datos se leen del localStorage clave <code>carrito</code>.</p>
+    </aside>
+
+    <main class="surface item4">
+        <h2>Productos en el carrito</h2>
+        <div id="carrito-lista" class="cart-grid"></div>
+        <p id="carrito-total" class="total"></p>
+        <div class="action-row">
+            <button type="button" id="btn-vaciar" class="action-btn danger">Vaciar carrito</button>
+        </div>
+    </main>
+
+    <footer class="surface item5"></footer>
+
+    <script>
+        const STORAGE_KEY = "carrito";
+        const carritoLista = document.getElementById("carrito-lista");
+        const carritoTotal = document.getElementById("carrito-total");
+        const btnVaciar = document.getElementById("btn-vaciar");
+        const cartCount = document.getElementById("cart-count");
+        const formatter = new Intl.NumberFormat("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        const leerCarrito = () => {
+            try {
+                const guardado = localStorage.getItem(STORAGE_KEY);
+                return guardado ? JSON.parse(guardado) : [];
+            } catch (error) {
+                console.error("No se pudo leer el carrito", error);
+                return [];
+            }
+        };
+
+        const formatPrice = (valor) => `$${formatter.format(valor || 0)}`;
+
+        const guardarCarrito = (items) => {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        };
+
+        const eliminarProducto = (index) => {
+            const items = leerCarrito();
+            if (index < 0 || index >= items.length) return;
+            items.splice(index, 1);
+            if (items.length === 0) {
+                localStorage.removeItem(STORAGE_KEY);
+            } else {
+                guardarCarrito(items);
+            }
+            renderCarrito();
+        };
+
+        const vaciarCarrito = () => {
+            localStorage.removeItem(STORAGE_KEY);
+            renderCarrito();
+        };
+
+        const actualizarContadorCarrito = (items) => {
+            const total = items.reduce((acc, item) => acc + (item.cantidad || 1), 0);
+            if (cartCount) {
+                cartCount.textContent = total;
+            }
+        };
+
+        const renderCarrito = () => {
+            const items = leerCarrito();
+            actualizarContadorCarrito(items);
+            if (!items.length) {
+                carritoLista.innerHTML = `<p class="empty">Todavia no agregaste productos.</p>`;
+                carritoTotal.textContent = "";
+                return;
+            }
+
+            carritoLista.innerHTML = items.map((item, index) => {
+                const cantidad = item.cantidad || 1;
+                const subtotal = (item.precio || 0) * cantidad;
+                return `
+                    <div class="cart-card">
+                        <h3>${item.nombre}</h3>
+                        <p class="cart-meta">${item.categoria || "Producto"} | ${item.marca || ""}</p>
+                        <p class="cart-meta">Cantidad: ${cantidad}</p>
+                        <p class="cart-precio">${formatPrice(subtotal)} (${cantidad} x ${formatPrice(item.precio || 0)})</p>
+                        <button type="button" class="action-btn secondary" data-index="${index}">Eliminar producto</button>
+                    </div>
+                `;
+            }).join("");
+
+            const total = items.reduce((acc, item) => {
+                const cantidad = item.cantidad || 1;
+                return acc + (item.precio || 0) * cantidad;
+            }, 0);
+            carritoTotal.textContent = `Total: ${formatPrice(total)}`;
+        };
+
+        const wireEvents = () => {
+            carritoLista.addEventListener("click", (event) => {
+                const target = event.target;
+                if (!(target instanceof HTMLElement)) return;
+                if (!target.dataset.index) return;
+                const idx = Number(target.dataset.index);
+                eliminarProducto(idx);
+            });
+
+            btnVaciar.addEventListener("click", vaciarCarrito);
+        };
+
+        window.addEventListener("DOMContentLoaded", () => {
+            renderCarrito();
+            wireEvents();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Operaciones Matemáticas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("images/fondo_numeros.jpg") center/cover fixed;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            padding: 2rem 2.4rem;
+            border-radius: 14px;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+            color: #111827;
+            width: 520px;
+        }
+        h1 {
+            margin: 0 0 1.4rem;
+            text-align: center;
+            letter-spacing: 0.03em;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .row input {
+            width: 100px;
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .symbol {
+            width: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .resultado {
+            min-width: 100px;
+            display: inline-block;
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #f8fafc;
+            font-size: 1rem;
+        }
+        .equals {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Operaciones Matemáticas</h1>
+
+    <div class="row">
+        <input id="suma-a" type="number" oninput="resolver('suma')" aria-label="Sumando A">
+        <span class="symbol">+</span>
+        <input id="suma-b" type="number" oninput="resolver('suma')" aria-label="Sumando B">
+        <span class="equals">=</span>
+        <span id="suma-r" class="resultado" aria-live="polite"></span>
+    </div>
+
+    <div class="row">
+        <input id="resta-a" type="number" oninput="resolver('resta')" aria-label="Minuendo">
+        <span class="symbol">-</span>
+        <input id="resta-b" type="number" oninput="resolver('resta')" aria-label="Sustraendo">
+        <span class="equals">=</span>
+        <span id="resta-r" class="resultado" aria-live="polite"></span>
+    </div>
+
+    <div class="row">
+        <input id="mult-a" type="number" oninput="resolver('mult')" aria-label="Factor A">
+        <span class="symbol">x</span>
+        <input id="mult-b" type="number" oninput="resolver('mult')" aria-label="Factor B">
+        <span class="equals">=</span>
+        <span id="mult-r" class="resultado" aria-live="polite"></span>
+    </div>
+
+    <div class="row">
+        <input id="div-a" type="number" oninput="resolver('div')" aria-label="Dividendo">
+        <span class="symbol">/</span>
+        <input id="div-b" type="number" oninput="resolver('div')" aria-label="Divisor">
+        <span class="equals">=</span>
+        <span id="div-r" class="resultado" aria-live="polite"></span>
+    </div>
+</div>
+
+<script>
+    const inputs = {
+        suma: { a: document.getElementById("suma-a"), b: document.getElementById("suma-b"), r: document.getElementById("suma-r") },
+        resta: { a: document.getElementById("resta-a"), b: document.getElementById("resta-b"), r: document.getElementById("resta-r") },
+        mult: { a: document.getElementById("mult-a"), b: document.getElementById("mult-b"), r: document.getElementById("mult-r") },
+        div: { a: document.getElementById("div-a"), b: document.getElementById("div-b"), r: document.getElementById("div-r") }
+    };
+
+    const operaciones = {
+        suma: (a, b) => a + b,
+        resta: (a, b) => a - b,
+        mult: (a, b) => a * b,
+        div: (a, b) => b === 0 ? "Infinity" : a / b
+    };
+
+    const resolver = (tipo) => {
+        const { a, b, r } = inputs[tipo];
+        const valorA = Number(a.value);
+        const valorB = Number(b.value);
+        const ambosValidos = a.value !== "" && b.value !== "" && !Number.isNaN(valorA) && !Number.isNaN(valorB);
+
+        if (!ambosValidos) {
+            r.innerHTML = "";
+            return;
+        }
+
+        const resultado = operaciones[tipo](valorA, valorB);
+        r.innerHTML = resultado;
+    };
+
+    window.resolver = resolver;
+</script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,38 @@
+@media (max-width: 768px) {
+  .page {
+    margin: 0;
+    padding: 0 16px 24px;
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    .main-nav {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+
+  .hero {
+    padding: 36px 24px;
+
+    .hero-content {
+      h1 {
+        font-size: 26px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+
+    img {
+      height: 240px;
+    }
+  }
+}

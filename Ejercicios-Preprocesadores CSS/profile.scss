@@ -1,0 +1,64 @@
+$ink: #0f172a;
+$muted: #6c7284;
+$border: #e4e7ef;
+$bg: radial-gradient(circle at 10% 10%, #1f2937, #0f172a 40%), radial-gradient(circle at 90% 0%, #111827, #0b1020 45%);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  color: $ink;
+  background: $bg;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero {
+  color: #e5e7eb;
+  text-align: center;
+  padding: 32px 16px 12px;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
+.profile-card {
+  width: min(360px, 100%);
+  border: 1px solid $border;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.card-text {
+  color: $muted;
+}
+
+.avatar-wrapper {
+  width: 120px;
+  height: 120px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.list-group-item {
+  font-weight: 600;
+  color: $ink;
+}
+
+.badge-pill {
+  min-width: 32px;
+}

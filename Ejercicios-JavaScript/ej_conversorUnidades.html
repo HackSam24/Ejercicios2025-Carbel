@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Conversor de Unidades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("images/fondo_numeros.jpg") center/cover fixed;
+            color: #f5f7fa;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            color: #1f2933;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            width: 420px;
+        }
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.8rem;
+            letter-spacing: 0.04em;
+        }
+        .field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 0.75rem;
+        }
+        .field label {
+            width: 80px;
+            font-weight: 600;
+        }
+        .field input {
+            flex: 1;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid #cbd2d9;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .hint {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #52606d;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Convertidor de Unidades</h1>
+    <div class="field">
+        <label for="metro">Metro</label>
+        <input id="metro" name="metro" type="number" step="any" onchange="convertir(this.value, this.name)">
+    </div>
+    <div class="field">
+        <label for="pulgada">Pulgada</label>
+        <input id="pulgada" name="pulgada" type="number" step="any" onchange="convertir(this.value, this.name)">
+    </div>
+    <div class="field">
+        <label for="pie">Pie</label>
+        <input id="pie" name="pie" type="number" step="any" onchange="convertir(this.value, this.name)">
+    </div>
+    <div class="field">
+        <label for="yarda">Yarda</label>
+        <input id="yarda" name="yarda" type="number" step="any" onchange="convertir(this.value, this.name)">
+    </div>
+</div>
+
+<script>
+    const METRO_A_PULGADA = 39.3701;
+    const METRO_A_PIE = 3.28084;
+    const METRO_A_YARDA = 1.09361;
+
+    const inputMetro = document.getElementById("metro");
+    const inputPulgada = document.getElementById("pulgada");
+    const inputPie = document.getElementById("pie");
+    const inputYarda = document.getElementById("yarda");
+
+    const limpiarCampos = () => {
+        inputMetro.value = "";
+        inputPulgada.value = "";
+        inputPie.value = "";
+        inputYarda.value = "";
+    };
+
+    const actualizarCampos = ({ metros, pulgadas, pies, yardas }) => {
+        const redondear = (valor) => Number(valor.toFixed(2));
+
+        inputMetro.value = redondear(metros);
+        inputPulgada.value = redondear(pulgadas);
+        inputPie.value = redondear(pies);
+        inputYarda.value = redondear(yardas);
+    };
+
+    const convertir = (valor, unidad) => {
+        const normalizado = valor.replace(",", ".");
+        const numero = parseFloat(normalizado);
+        const sinValor = valor === "" || isNaN(numero);
+        if (sinValor) {
+            limpiarCampos();
+            return;
+        }
+
+        const metros = unidad === "metro"
+            ? numero
+            : unidad === "pulgada"
+                ? numero / METRO_A_PULGADA
+                : unidad === "pie"
+                    ? numero / METRO_A_PIE
+                    : unidad === "yarda"
+                        ? numero / METRO_A_YARDA
+                        : null;
+
+        if (metros === null) {
+            return;
+        }
+
+        const pulgadas = metros * METRO_A_PULGADA;
+        const pies = metros * METRO_A_PIE;
+        const yardas = metros * METRO_A_YARDA;
+
+        actualizarCampos({ metros, pulgadas, pies, yardas });
+    };
+
+    window.convertir = convertir;
+</script>
+</body>
+</html>

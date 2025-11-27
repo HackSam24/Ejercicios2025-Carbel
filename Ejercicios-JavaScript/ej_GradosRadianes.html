@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Grados a Radianes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("images/fondo_numeros.jpg") center/cover fixed;
+            color: #f5f7fa;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2.25rem;
+            border-radius: 16px;
+            width: 420px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        }
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.04em;
+            font-size: 1.8rem;
+        }
+        .field {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .field label {
+            width: 90px;
+            font-weight: 700;
+            color: #d1e2ff;
+        }
+        .field input {
+            flex: 1;
+            padding: 0.65rem 0.8rem;
+            border-radius: 10px;
+            border: 1px solid #d1e2ff;
+            font-size: 1rem;
+        }
+        .hint {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c1cede;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Grados a Radianes</h1>
+    <div class="field">
+        <label for="grados">Grados</label>
+        <input id="grados" type="number" step="any" onchange="desdeGrados(this.value)">
+    </div>
+    <div class="field">
+        <label for="radianes">Radianes</label>
+        <input id="radianes" type="number" step="any" onchange="desdeRadianes(this.value)">
+    </div>
+</div>
+
+<script>
+    /**
+     * desdeGrados: convierte grados a radianes usando Math.PI y actualiza el campo radianes.
+     * @param {string} valor - Número en grados capturado desde el input.
+     * @returns {void}
+     */
+    function desdeGrados(valor) {
+        if (valor === "") {
+            limpiar();
+            return;
+        }
+        const grados = parseFloat(valor);
+        if (isNaN(grados)) {
+            limpiar();
+            return;
+        }
+        const radianes = grados * Math.PI / 180;
+        document.getElementById("radianes").value = radianes.toFixed(10);
+    }
+
+    /**
+     * desdeRadianes: convierte radianes a grados usando Math.PI y actualiza el campo grados.
+     * @param {string} valor - Número en radianes capturado desde el input.
+     * @returns {void}
+     */
+    function desdeRadianes(valor) {
+        if (valor === "") {
+            limpiar();
+            return;
+        }
+        const radianes = parseFloat(valor);
+        if (isNaN(radianes)) {
+            limpiar();
+            return;
+        }
+        const grados = radianes * 180 / Math.PI;
+        document.getElementById("grados").value = grados.toFixed(4);
+    }
+
+    /**
+     * limpiar: deja ambos campos vacíos cuando no hay dato válido.
+     * @returns {void}
+     */
+    function limpiar() {
+        document.getElementById("grados").value = "";
+        document.getElementById("radianes").value = "";
+    }
+</script>
+</body>
+</html>

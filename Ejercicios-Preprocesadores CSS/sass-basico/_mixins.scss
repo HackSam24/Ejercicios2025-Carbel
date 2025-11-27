@@ -1,0 +1,8 @@
+@mixin themed-bg($bg, $text) {
+  background: $bg;
+  color: $text;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}

@@ -1,0 +1,46 @@
+@use "variables";
+@use "mixins";
+@use "nested";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  background: variables.$bg;
+  color: variables.$ink;
+  padding: 2rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    margin: 0;
+    letter-spacing: -0.4px;
+    color: variables.$ink;
+  }
+
+  p {
+    margin: 0.4rem 0 0;
+    color: variables.$muted;
+  }
+}
+
+.pill {
+  @include mixins.themed-bg(variables.$primary, #fff);
+  display: inline-block;
+}
+
+.notice {
+  @include mixins.themed-bg(variables.$secondary, #0b0b0b);
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
