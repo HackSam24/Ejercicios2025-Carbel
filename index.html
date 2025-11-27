@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,16 +6,17 @@
     <title>Guía de ejercicios | Taller de desarrollo web</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: radial-gradient(circle at 20% 20%, #e8f2ff, #f8f9ff 40%), radial-gradient(circle at 80% 0%, #ffe7f0, #f8f9ff 45%);
-            --card: #ffffff;
-            --text: #0f1629;
-            --muted: #4d5670;
-            --accent: #5f6bff;
-            --accent-2: #00b7a8;
-            --border: #e5e9ff;
+            --bg: linear-gradient(145deg, #06070f 0%, #0b1223 45%, #04050b 100%), radial-gradient(60% 90% at 15% 15%, rgba(255, 77, 77, 0.18), transparent), radial-gradient(70% 90% at 85% 10%, rgba(27, 231, 255, 0.2), transparent);
+            --card: linear-gradient(160deg, #0f1728, #0c1324);
+            --text: #e6ecff;
+            --muted: #9ba4b9;
+            --accent: #ff4141;
+            --accent-2: #14e1ff;
+            --border: #1f293d;
+            --shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(20, 225, 255, 0.08);
         }
 
         * { box-sizing: border-box; }
@@ -24,6 +25,7 @@
             margin: 0;
             font-family: "Poppins", "Segoe UI", sans-serif;
             background: var(--bg);
+            background-attachment: fixed;
             color: var(--text);
             min-height: 100vh;
             padding: 48px 20px 72px;
@@ -31,6 +33,20 @@
             flex-direction: column;
             align-items: center;
             gap: 32px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(20, 225, 255, 0.08), transparent 45%),
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0 14px, rgba(255, 255, 255, 0) 14px 28px);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            opacity: 0.7;
         }
 
         header {
@@ -44,23 +60,26 @@
             gap: 8px;
             padding: 10px 16px;
             border-radius: 999px;
-            background: linear-gradient(120deg, var(--accent), var(--accent-2));
-            color: #fff;
-            font-weight: 600;
-            letter-spacing: 0.4px;
-            box-shadow: 0 14px 35px rgba(0, 74, 255, 0.25);
+            background: linear-gradient(115deg, var(--accent), var(--accent-2));
+            color: #0a0d14;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            box-shadow: 0 12px 30px rgba(255, 65, 65, 0.35);
         }
 
         h1 {
             margin: 16px 0 8px;
-            font-size: clamp(32px, 4vw, 44px);
-            letter-spacing: -0.5px;
+            font-size: clamp(32px, 4vw, 46px);
+            letter-spacing: 0.5px;
+            font-family: "Orbitron", "Poppins", "Segoe UI", sans-serif;
+            text-transform: uppercase;
         }
 
         p.lead {
             margin: 0 auto;
             color: var(--muted);
-            max-width: 720px;
+            max-width: 820px;
             font-size: 17px;
             line-height: 1.6;
         }
@@ -85,8 +104,22 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 18px;
-            box-shadow: 0 18px 40px rgba(15, 22, 41, 0.12);
-            padding: 20px 18px 10px;
+            box-shadow: var(--shadow);
+            padding: 22px 18px 12px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            opacity: 0.9;
         }
 
         .card header {
@@ -96,12 +129,16 @@
 
         .card h3 {
             margin: 0;
-            color: var(--accent);
-            letter-spacing: -0.2px;
+            color: var(--accent-2);
+            letter-spacing: 0.4px;
+            font-family: "Orbitron", "Poppins", "Segoe UI", sans-serif;
+            text-transform: uppercase;
         }
 
         .card small {
             color: var(--muted);
+            letter-spacing: 0.2px;
+            text-transform: uppercase;
         }
 
         table {
@@ -109,16 +146,18 @@
             border-collapse: collapse;
             margin-top: 10px;
             font-size: 15px;
+            color: var(--text);
         }
 
         thead th {
-            background: #1d2440;
+            background: linear-gradient(120deg, #101a2f, #111d34 50%, #0d1629);
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             font-weight: 700;
             padding: 12px 14px;
             border-radius: 12px 12px 0 0;
+            border-bottom: 1px solid rgba(255, 65, 65, 0.3);
         }
 
         tbody th, tbody td {
@@ -127,12 +166,13 @@
             vertical-align: top;
         }
 
-        tbody tr:nth-child(odd) { background: #f6f8ff; }
-        tbody tr:nth-child(even) { background: #edf2ff; }
+        tbody tr:nth-child(odd) { background: rgba(255, 255, 255, 0.02); }
+        tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.04); }
 
         tbody tr:hover {
-            background: #e6ebff;
-            transition: background 0.2s ease;
+            background: rgba(255, 65, 65, 0.06);
+            transition: background 0.2s ease, transform 0.2s ease;
+            transform: translateX(4px);
         }
 
         tbody th {
@@ -144,35 +184,42 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 14px;
+            gap: 8px;
+            padding: 8px 16px;
             border-radius: 999px;
-            background: linear-gradient(120deg, var(--accent), var(--accent-2));
-            color: #fff;
+            background: linear-gradient(115deg, var(--accent), var(--accent-2));
+            color: #0a0d14;
             text-decoration: none;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-            box-shadow: 0 10px 25px rgba(0, 74, 255, 0.2);
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            box-shadow: 0 12px 26px rgba(255, 65, 65, 0.3);
+            text-transform: uppercase;
+        }
+
+        .pill-link::after {
+            content: "→";
+            font-size: 14px;
         }
 
         footer {
             text-align: center;
             color: var(--muted);
             font-size: 14px;
+            letter-spacing: 0.3px;
         }
     </style>
 </head>
 <body>
 <header>
-    <div class="badge">Taller de desarrollo web · Guía de ejercicios</div>
-    <h1>Ruta de prácticas 2025</h1>
-    <p class="lead">Enlaces directos a las prácticas que hemos trabajado: HTML, CSS, JavaScript y preprocesadores (Sass). Haz clic en “Abrir” para revisar cada entrega.</p>
+    <div class="badge">Taller de desarrollo web | ejercicios 2025 </div>
+    <h1>Ejercicios 2025</h1>
+    <p class="lead">Ejercicios con enlaces a las prácticas de HTML, CSS, JavaScript y Sass.</p>
 </header>
 
 <section class="grid">
     <article class="card">
         <header>
             <h3>Ejercicios HTML</h3>
-            <small>Estructura y semántica</small>
         </header>
         <table>
             <thead>
@@ -187,31 +234,31 @@
             <tr>
                 <th scope="row">1</th>
                 <td>ej_noticia</td>
-                <td>Noticia con encabezado, secciones, imágenes y pie de página.</td>
+                <td>Noticia con encabezado, secciones, imágenes y pie de página afinada como boletín de box.</td>
                 <td><a class="pill-link" href="Ejercicios-HTML/ej_noticia.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
                 <td>ej_listas</td>
-                <td>Listas ordenadas y no ordenadas con imágenes y enlaces.</td>
+                <td>Listas ordenadas y no ordenadas con imágenes y enlaces alineados como parrilla de salida.</td>
                 <td><a class="pill-link" href="Ejercicios-HTML/ej_listas.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
                 <td>ej_tablas</td>
-                <td>Tablas con thead, tbody, tfoot, caption y combinaciones de celdas.</td>
+                <td>Tablas con thead, tbody, tfoot, caption y combinaciones de celdas listas para telemetría.</td>
                 <td><a class="pill-link" href="Ejercicios-HTML/ej_tablas.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">4</th>
                 <td>ej_formulario</td>
-                <td>Formulario con inputs variados, labels asociados y botones.</td>
+                <td>Formulario con inputs variados, labels asociados y botones, listo para la revisión técnica.</td>
                 <td><a class="pill-link" href="Ejercicios-HTML/ej_formulario.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">5</th>
                 <td>ej_animales</td>
-                <td>Multimedia local: audio, video e incrustación de YouTube.</td>
+                <td>Multimedia local: audio, video e incrustación de YouTube con vibe de paddock.</td>
                 <td><a class="pill-link" href="Ejercicios-HTML/ej_animales.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             </tbody>
@@ -221,7 +268,6 @@
     <article class="card">
         <header>
             <h3>Ejercicios CSS</h3>
-            <small>Estilos, maquetación y componentes</small>
         </header>
         <table>
             <thead>
@@ -236,49 +282,49 @@
             <tr>
                 <th scope="row">1</th>
                 <td>ej_columnas</td>
-                <td>Tipografía base, colores y distribución en columnas.</td>
+                <td>Tipografía base, colores y distribución en columnas como una recta bien marcada.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/ej_columnas.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
                 <td>ej_leyes</td>
-                <td>Listas con distintos list-style y resaltados.</td>
+                <td>Listas con distintos list-style y resaltados como panel de indicadores.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/ej_leyes.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
                 <td>fondos</td>
-                <td>Fondos con imágenes, repeat, position y attachment.</td>
+                <td>Fondos con imágenes, repeat, position y attachment para darle textura a la pista.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/fondos.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">4</th>
                 <td>ej_formulario</td>
-                <td>Formulario estilizado con utilidades y espaciados.</td>
+                <td>Formulario estilizado con utilidades y espaciados afinados como cockpit.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/ej_formulario.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">5</th>
                 <td>ej_cv</td>
-                <td>Maquetación de CV con tarjetas, iconos e imagen de perfil.</td>
+                <td>Maquetación de CV con tarjetas, iconos e imagen de perfil al estilo ficha de piloto.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/ej_cv.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">6</th>
                 <td>ej_instagram</td>
-                <td>Galería responsiva tipo Instagram usando Bootstrap.</td>
+                <td>Galería responsiva tipo Instagram usando Bootstrap, como muro de highlights.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/ej_instagram.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">7</th>
                 <td>carrito</td>
-                <td>Carrito de compras con tarjetas de producto y totales.</td>
+                <td>Carrito de compras con tarjetas de producto y totales, listo para un pit stop de e-commerce.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/carrito.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">8</th>
                 <td>ej_productos</td>
-                <td>Catálogo de productos con tarjetas y resúmenes.</td>
+                <td>Catálogo de productos con tarjetas y resúmenes al ritmo de una vuelta rápida.</td>
                 <td><a class="pill-link" href="Ejercicios-CSS/ej_productos.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             </tbody>
@@ -288,7 +334,7 @@
     <article class="card wide">
         <header>
             <h3>Ejercicios JavaScript</h3>
-            <small>Interacción y lógica en el navegador</small>
+        
         </header>
         <table>
             <thead>
@@ -309,25 +355,25 @@
             <tr>
                 <th scope="row">2</th>
                 <td>ej_conversorUnidades</td>
-                <td>Conversor de unidades con entradas numéricas y resultados.</td>
+                <td>Conversor de unidades con entradas numéricas y resultados, como tablero de instrumentos.</td>
                 <td><a class="pill-link" href="Ejercicios-JavaScript/ej_conversorUnidades.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
                 <td>ej_GradosRadianes</td>
-                <td>Transformación de grados a radianes usando cálculos básicos.</td>
+                <td>Transformación de grados a radianes usando cálculos básicos: calibración de la dirección.</td>
                 <td><a class="pill-link" href="Ejercicios-JavaScript/ej_GradosRadianes.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">4</th>
                 <td>ej_operacionesMat</td>
-                <td>Operaciones aritméticas básicas y despliegue de resultados.</td>
+                <td>Operaciones aritméticas básicas y despliegue de resultados para ajustar tiempos.</td>
                 <td><a class="pill-link" href="Ejercicios-JavaScript/ej_operacionesMat.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">5</th>
                 <td>ej_MostrarOcultar</td>
-                <td>Mostrar y ocultar un elemento en pantalla con eventos.</td>
+                <td>Mostrar y ocultar un elemento en pantalla con eventos, como encender y apagar las luces del panel.</td>
                 <td><a class="pill-link" href="Ejercicios-JavaScript/ej_MostrarOcultar.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             </tbody>
@@ -337,7 +383,7 @@
     <article class="card wide">
         <header>
             <h3>Preprocesadores CSS (Sass)</h3>
-            <small>Variables, mixins y componentes</small>
+
         </header>
         <table>
             <thead>
@@ -352,37 +398,37 @@
             <tr>
                 <th scope="row">1</th>
                 <td>ej_sass_basico</td>
-                <td>Variables, mixins y anidación básica en Sass.</td>
+                <td>Variables, mixins y anidación básica en Sass para arrancar el motor del preprocesador.</td>
                 <td><a class="pill-link" href="Ejercicios-Preprocesadores%20CSS/sass-basico/ej_sass_basico.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
                 <td>ej_DiseñoInterires</td>
-                <td>Landing de diseño de interiores maquetada con Sass.</td>
+                <td>Landing de diseño de interiores maquetada con Sass, como showroom de lujo.</td>
                 <td><a class="pill-link" href="Ejercicios-Preprocesadores%20CSS/ej_Dise%C3%B1oInterires/index.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
                 <td>ej_perfil</td>
-                <td>Componente de perfil usando utilidades de Bootstrap y estilos propios.</td>
+                <td>Componente de perfil usando utilidades de Bootstrap y estilos propios, ficha de piloto titular.</td>
                 <td><a class="pill-link" href="Ejercicios-Preprocesadores%20CSS/ej_perfil.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">4</th>
                 <td>ej_timeline</td>
-                <td>Timeline vertical con tarjetas y acentos de color.</td>
+                <td>Timeline vertical con tarjetas y acentos de color para seguir la carrera.</td>
                 <td><a class="pill-link" href="Ejercicios-Preprocesadores%20CSS/ej_timeline.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">5</th>
                 <td>ej_vuelos</td>
-                <td>Componente de selección de vuelos con íconos y tarjetas.</td>
+                <td>Componente de selección de vuelos con íconos y tarjetas, como panel de box.</td>
                 <td><a class="pill-link" href="Ejercicios-Preprocesadores%20CSS/ej_vuelos.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             <tr>
                 <th scope="row">6</th>
                 <td>ej_youtube</td>
-                <td>Layout inspirado en YouTube con aside y grid de videos.</td>
+                <td>Layout inspirado en YouTube con aside y grid de videos, ideal para repasar onboard.</td>
                 <td><a class="pill-link" href="Ejercicios-Preprocesadores%20CSS/ej_youtube.html" target="_blank" rel="noopener noreferrer">Abrir</a></td>
             </tr>
             </tbody>
@@ -391,7 +437,6 @@
 </section>
 
 <footer>
-    Actualizado solo con las prácticas que ya trabajamos. Si falta algo, avísame y lo añadimos.
 </footer>
 </body>
 </html>
